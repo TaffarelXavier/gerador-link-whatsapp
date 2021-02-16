@@ -3,7 +3,6 @@ import Head from "next/head";
 import gerarLinkWhatsapp from "../utils/gerarLinkWhatsapp";
 
 export default function Home() {
-
   const refInputCelular = useRef(null);
 
   const handleSubmit = (ev) => {
@@ -12,14 +11,21 @@ export default function Home() {
     gerarLinkWhatsapp(form.celular.value, form.mensagem.value);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     refInputCelular.current.focus();
-  },[])
+  }, []);
   return (
     <>
       <Head>
         <link rel="stylesheet" href="/style.css" />
       </Head>
+      <header className="header">
+        <div className="header-content">
+          <div className="nav">
+            <img src="/abrir-whats.svg" alt=""/>
+          </div>
+        </div>
+      </header>
       <div className="main">
         <h1>Gerador de Link para Whatsapp</h1>
         <hr />
@@ -38,21 +44,22 @@ export default function Home() {
           </div>
           <div className="form-group">
             <label htmlFor="">MENSAGEM</label>
-            <input
+            <textarea
               type="text"
               name="mensagem"
               placeholder="Escreva o texto"
               className="form-control"
+              rows={3}
             />
           </div>
-          <button className="btn">Abrir whats</button>
+          <button className="btn-whatsapp">ABRIR WHATS</button>
         </form>
         <hr />
         <h2>Como funciona</h2>
         <ul>
           <li>Insira o nº do WhatsApp Ex: 85 9 9660-5866</li>
           <li>Escreva a mensagem padrão que será exibida</li>
-          <li>Clique em “GERAR LINK”</li>
+          <li>Clique em "ABRIR WHATS"</li>
         </ul>
       </div>
     </>
