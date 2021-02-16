@@ -1,65 +1,60 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import React, { useRef, useEffect } from "react";
+import Head from "next/head";
+import gerarLinkWhatsapp from "../utils/gerarLinkWhatsapp";
 
 export default function Home() {
+
+  const refInputCelular = useRef(null);
+
+  const handleSubmit = (ev) => {
+    ev.preventDefault();
+    const form = document.getElementById("form-gerar-link-whatsapp");
+    gerarLinkWhatsapp(form.celular.value, form.mensagem.value);
+  };
+
+  useEffect(()=>{
+    refInputCelular.current.focus();
+  },[])
   return (
-    <div className={styles.container}>
+    <>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="/style.css" />
       </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
+      <div className="main">
+        <h1>Gerador de Link para Whatsapp</h1>
+        <hr />
+        <form onSubmit={handleSubmit} id="form-gerar-link-whatsapp">
+          <div className="form-group">
+            <label htmlFor="">NÚMERO DO CELULAR</label>
+            <input
+              type="text"
+              name="celular"
+              placeholder="(DDD) 0 0000-000"
+              autoFocus
+              required
+              className="form-control"
+              ref={refInputCelular}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="">MENSAGEM</label>
+            <input
+              type="text"
+              name="mensagem"
+              placeholder="Escreva o texto"
+              className="form-control"
+            />
+          </div>
+          <button className="btn">Abrir whats</button>
+        </form>
+        <hr />
+        <h2>Como funciona</h2>
+        <ul>
+          <li>Insira o nº do WhatsApp Ex: 85 9 9660-5866</li>
+          <li>Escreva a mensagem padrão que será exibida</li>
+          <li>Clique em “GERAR LINK”</li>
+        </ul>
+      </div>
+    </>
+  );
 }
