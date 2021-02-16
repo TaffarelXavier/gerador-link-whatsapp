@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <link rel="stylesheet" href="/style.css" />
+        <link rel="stylesheet" href="/style.min.css" />
       </Head>
       <header className="header">
         <div className="header-content">

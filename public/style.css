@@ -9,10 +9,9 @@ body{
 }
 
 .main{
-    /* border:2px solid red; */
     max-width: 768px;
     margin:0px auto;
-    padding:30px;
+    padding-top: 30px;
 }
 .header-content{
     max-width: 768px;
